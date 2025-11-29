@@ -42,11 +42,11 @@ importers:
         specifier: ^3.1.11
         version: 3.1.11
       swagger-autogen:
-        specifier: ^2.23.7
+        specifier: 2.23.7
         version: 2.23.7
       swagger-ui-express:
-        specifier: ^5.0.1
-        version: 5.0.1(express@5.1.0)
+        specifier: 4.6.3
+        version: 4.6.3(express@5.1.0)
       ts-node-dev:
         specifier: ^2.0.0
         version: 2.0.0(@types/node@24.10.1)(typescript@5.9.3)
@@ -76,8 +76,8 @@ importers:
         specifier: ^24.10.1
         version: 24.10.1
       '@types/swagger-ui-express':
-        specifier: ^4.1.8
-        version: 4.1.8
+        specifier: 4.1.6
+        version: 4.1.6
 
 packages:
 
@@ -176,8 +176,8 @@ packages:
   '@types/strip-json-comments@0.0.30':
     resolution: {integrity: sha512-7NQmHra/JILCd1QqpSzl8+mJRc8ZHz3uDm8YV1Ks9IhK0epEiTw8aIErbvH9PI+6XbqhyIQy3462nEsn7UVzjQ==}
 
-  '@types/swagger-ui-express@4.1.8':
-    resolution: {integrity: sha512-AhZV8/EIreHFmBV5wAs0gzJUNq9JbbSXgJLQubCC0jtIo6prnI9MIRRxnU4MZX9RB9yXxF1V4R7jtLl/Wcj31g==}
+  '@types/swagger-ui-express@4.1.6':
+    resolution: {integrity: sha512-UVSiGYXa5IzdJJG3hrc86e8KdZWLYxyEsVoUI4iPXc7CO4VZ3AfNP8d/8+hrDRIqz+HAaSMtZSqAsF3Nq2X/Dg==}
 
   '@types/webidl-conversions@7.0.3':
     resolution: {integrity: sha512-CiJJvcRtIgzadHCYXw7dqEnMNRjhGZlYK05Mj9OyktqV8uVT8fD2BFOB7S1uwBE3Kj2Z+4UyPmFw/Ixgw/LAlA==}
@@ -759,8 +759,8 @@ packages:
   swagger-ui-dist@5.30.3:
     resolution: {integrity: sha512-giQl7/ToPxCqnUAx2wpnSnDNGZtGzw1LyUw6ZitIpTmdrvpxKFY/94v1hihm0zYNpgp1/VY0jTDk//R0BBgnRQ==}
 
-  swagger-ui-express@5.0.1:
-    resolution: {integrity: sha512-SrNU3RiBGTLLmFU8GIJdOdanJTl4TOmT27tt3bWWHppqYmAZ6IDuEuBvMU6nZq0zLEe6b/1rACXCgLZqO6ZfrA==}
+  swagger-ui-express@4.6.3:
+    resolution: {integrity: sha512-CDje4PndhTD2HkgyKH3pab+LKspDeB/NhPN2OF1j+piYIamQqBYwAXWESOT1Yju2xFg51bRW9sUng2WxDjzArw==}
     engines: {node: '>= v0.10.32'}
     peerDependencies:
       express: '>=4.0.0 || >=5.0.0-beta'
@@ -974,7 +974,7 @@ snapshots:
 
   '@types/strip-json-comments@0.0.30': {}
 
-  '@types/swagger-ui-express@4.1.8':
+  '@types/swagger-ui-express@4.1.6':
     dependencies:
       '@types/express': 5.0.5
       '@types/serve-static': 1.15.10
@@ -1565,7 +1565,7 @@ snapshots:
     dependencies:
       '@scarf/scarf': 1.4.0
 
-  swagger-ui-express@5.0.1(express@5.1.0):
+  swagger-ui-express@4.6.3(express@5.1.0):
     dependencies:
       express: 5.1.0
       swagger-ui-dist: 5.30.3

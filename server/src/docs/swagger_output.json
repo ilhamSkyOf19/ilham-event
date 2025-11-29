@@ -2,21 +2,21 @@
   "openapi": "3.0.0",
   "info": {
     "version": "v0.0.1",
-    "title": "documentation API Event",
-    "description": "description API Event"
+    "title": "Dokumentasi API Event",
+    "description": "Dokumentasi API Event"
   },
   "servers": [
     {
-      "url": "http://localhost:3001/api",
+      "url": "http://localhost:3000/api",
       "description": "Local server"
     },
     {
-      "url": "https://ilham-event-be.vercel.app/api",
+      "url": "https://ilham-event-be.app/api",
       "description": "Production server"
     }
   ],
   "paths": {
-    "/register": {
+    "/auth/register": {
       "post": {
         "description": "",
         "responses": {
@@ -26,12 +26,21 @@
         }
       }
     },
-    "/login": {
+    "/auth/login": {
       "post": {
         "description": "",
         "responses": {
           "default": {
             "description": ""
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
           }
         }
       }

@@ -1,22 +1,24 @@
 import swaggerAutogen from "swagger-autogen";
+import swagger from "swagger-autogen";
 
-// doc
+// swagger definition
 const doc = {
   info: {
     version: "v0.0.1",
-    title: "documentation API Event",
-    description: "description API Event",
+    title: "Dokumentasi API Event",
+    description: "Dokumentasi API Event",
   },
   servers: [
     {
-      url: "http://localhost:3001/api",
+      url: "http://localhost:3000/api",
       description: "Local server",
     },
     {
-      url: "https://ilham-event-be.vercel.app/api",
+      url: "https://ilham-event-be.app/api",
       description: "Production server",
     },
   ],
+
   components: {
     securitySchemes: {
       bearerAuth: {
@@ -24,7 +26,6 @@ const doc = {
         scheme: "bearer",
       },
     },
-
     schemas: {
       LoginRequest: {
         emailOrUsername: "ilham123",
@@ -34,11 +35,7 @@ const doc = {
   },
 };
 
-// output file
 const outputFile = "./src/docs/swagger_output.json";
+const endpointsFiles = ["./src/routes/auth.route.ts"];
 
-// endpoints files
-const endPointsFiles = ["./src/routes/auth.route.ts"];
-
-// instance
-swaggerAutogen({ openapi: "3.0.0" })(outputFile, endPointsFiles, doc);
+swaggerAutogen({ openapi: "3.0.0" })(outputFile, endpointsFiles, doc);

@@ -8,6 +8,8 @@ import authRoute from "./routes/auth.route";
 import connect from "./utils/db";
 import { errorMiddleware } from "./middlewares/error.middleware";
 import cookieParser from "cookie-parser";
+import cors from "cors";
+import docs from "./docs/route";
 
 async function initializeDB() {
   try {
@@ -19,6 +21,9 @@ async function initializeDB() {
 
     // initialization express
     const app = express();
+
+    // cors
+    app.use(cors());
 
     // initialization port
     const port = process.env.PORT || 3001;
@@ -36,7 +41,10 @@ async function initializeDB() {
     });
 
     // auth route
-    app.use("/api/auth", authRoute);
+    app.use("/api", authRoute);
+
+    // docs
+    docs(app);
 
     // initialize error middleware
     app.use(errorMiddleware);

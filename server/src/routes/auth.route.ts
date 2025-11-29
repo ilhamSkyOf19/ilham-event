@@ -10,13 +10,25 @@ const authRoute: Router = Router();
 
 // register
 authRoute.post(
-  "/register",
+  "/auth/register",
   validationMiddleware<AuthRegisterRequest>(AuthValidation.REGISTER),
   AuthController.register
 );
 
+/**
+ * #swagger.requestBody = {
+ *   required: true,
+ *   content: {
+ *     "application/json": {
+ *       schema: {
+ *         $ref: "#/components/schemas/LoginRequest"
+ *       }
+ *     }
+ *   }
+ * }
+ */
 authRoute.post(
-  "/login",
+  "/auth/login",
   validationMiddleware<AuthLoginRequest>(AuthValidation.LOGIN),
   AuthController.login
 );
