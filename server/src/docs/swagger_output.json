@@ -1,0 +1,63 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "v0.0.1",
+    "title": "documentation API Event",
+    "description": "description API Event"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001/api",
+      "description": "Local server"
+    },
+    {
+      "url": "https://ilham-event-be.vercel.app/api",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/register": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "emailOrUsername": {
+            "type": "string",
+            "example": "ilham123"
+          },
+          "password": {
+            "type": "string",
+            "example": "123"
+          }
+        }
+      }
+    }
+  }
+}
