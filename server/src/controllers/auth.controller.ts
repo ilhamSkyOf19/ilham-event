@@ -1,8 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-import { AuthRegisterRequest } from "../models/auth-model";
-import { ResponseType } from "../utils/request-type";
+import { AuthLoginRequest, AuthRegisterRequest } from "../models/auth-model";
+import { ResponseType } from "../utils/request-response-type";
 import { UserService } from "../services/auth.service";
-import { UserResponseType } from "../models/user-model";
+import { toUserResponseType, UserResponseType } from "../models/user-model";
+import { PayloadJwtType } from "../models/jwt-model";
+import { generateJwt } from "../utils/jwt";
+import { encrypt } from "../utils/encrypt";
+import UserModel from "../schemas/user-schema";
 
 export class AuthController {
   // register
@@ -18,11 +22,84 @@ export class AuthController {
       // call service
       const response = await UserService.create(data);
 
+      // get payload
+      const payload: PayloadJwtType = {
+        _id: response?._id as string,
+        fullName: response?.fullName ?? "",
+        email: response?.email ?? "",
+        username: response?.username ?? "",
+        role: response?.role ?? "user",
+      };
+
+      // generate jwt
+      const token = generateJwt(payload);
+
+      // set cookie
+      res.cookie("token", token, {
+        httpOnly: true,
+        sameSite: "none",
+        secure: false,
+        maxAge: 1000 * 60 * 60, // 1 jam
+      });
+
       // cek
       return res.status(200).json({
         status: "success",
         message: "berhasil",
         data: response,
+      });
+    } catch (error) {
+      // error
+      console.log(error);
+      next(error);
+    }
+  }
+
+  // login
+  static async login(
+    req: Request<{}, {}, AuthLoginRequest>,
+    res: Response<ResponseType<UserResponseType | null>>,
+    next: NextFunction
+  ) {
+    try {
+      // get request body
+      const data = req.body;
+
+      // call service
+      const response = await UserModel.findOne({
+        $or: [
+          { email: data.emailOrUsername },
+          { username: data.emailOrUsername },
+        ],
+      });
+
+      // cek response
+      if (!response) {
+        return res.status(401).json({
+          status: "failed",
+          message: "Email Or Username Or Password Not Found",
+          data: null,
+        });
+      }
+
+      // cek password
+      const isRequestPassword = encrypt(data.password);
+
+      if (response.password !== isRequestPassword) {
+        return res.status(401).json({
+          status: "failed",
+          message: "Email Or Username Or Password Not Found",
+          data: null,
+        });
+      }
+
+      return res.status(200).json({
+        status: "success",
+        message: "berhasil",
+        data: toUserResponseType({
+          ...response.toObject(),
+          _id: response._id.toString(),
+        }),
       });
     } catch (error) {
       // error

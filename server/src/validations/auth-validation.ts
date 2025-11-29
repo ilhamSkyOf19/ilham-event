@@ -1,5 +1,5 @@
 import z, { ZodType } from "zod";
-import { AuthRegisterRequest } from "../models/auth-model";
+import { AuthLoginRequest, AuthRegisterRequest } from "../models/auth-model";
 
 export class AuthValidation {
   // REGISTER
@@ -22,4 +22,12 @@ export class AuthValidation {
     .strict() satisfies ZodType<
     AuthRegisterRequest & { confirmPassword: string }
   >;
+
+  // login
+  static readonly LOGIN = z
+    .object({
+      emailOrUsername: z.string(),
+      password: z.string(),
+    })
+    .strict() satisfies ZodType<AuthLoginRequest>;
 }

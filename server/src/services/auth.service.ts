@@ -1,4 +1,4 @@
-import { AuthRegisterRequest } from "../models/auth-model";
+import { AuthLoginRequest, AuthRegisterRequest } from "../models/auth-model";
 import { toUserResponseType, UserResponseType } from "../models/user-model";
 import UserModel from "../schemas/user-schema";
 

@@ -7,6 +7,7 @@ import express from "express";
 import authRoute from "./routes/auth.route";
 import connect from "./utils/db";
 import { errorMiddleware } from "./middlewares/error.middleware";
+import cookieParser from "cookie-parser";
 
 async function initializeDB() {
   try {
@@ -22,9 +23,13 @@ async function initializeDB() {
     // initialization port
     const port = process.env.PORT || 3001;
 
+    // cookie parser
+    app.use(cookieParser());
+
     // initialization body-parser
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
+
     // test
     app.get("/", (_req, res) => {
       res.send("Hello World!");

@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { ResponseType } from "../utils/request-type";
+import { ResponseType } from "../utils/request-response-type";
 
 export const errorMiddleware = (
   err: any,
-  req: Request,
+  _req: Request,
   res: Response<ResponseType<string | null>>,
-  next: NextFunction
+  _next: NextFunction
 ) => {
   console.log("Caught error:", err);
 

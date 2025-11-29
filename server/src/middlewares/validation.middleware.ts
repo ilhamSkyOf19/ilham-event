@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { ZodError, ZodType } from "zod";
-import { ResponseType } from "../utils/request-type";
+import { ResponseType } from "../utils/request-response-type";
 
 export const validationMiddleware =
   <T>(schema: ZodType<T>) =>

@@ -9,3 +9,9 @@ export type AuthRegisterRequest = {
   isActive: boolean;
   activeCode: string;
 };
+
+// login
+export type AuthLoginRequest = {
+  emailOrUsername: string;
+  password: string;
+};

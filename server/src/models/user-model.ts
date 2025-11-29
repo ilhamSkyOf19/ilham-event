@@ -11,7 +11,7 @@ export type IUser = {
 };
 
 // user response
-export type UserResponseType = IUser & { _id: string };
+export type UserResponseType = Omit<IUser, "password"> & { _id: string };
 
 // to response
 export const toUserResponseType = (
@@ -22,7 +22,6 @@ export const toUserResponseType = (
     fullName: user.fullName,
     username: user.username,
     email: user.email,
-    password: user.password,
     pictureUser: user.pictureUser,
     role: user.role,
     isActive: user.isActive,
