@@ -93,6 +93,26 @@ export class AuthController {
         });
       }
 
+      // get payload
+      const payload: PayloadJwtType = {
+        _id: response._id.toString(),
+        fullName: response?.fullName,
+        email: response?.email,
+        username: response?.username,
+        role: response?.role,
+      };
+
+      // generate jwt
+      const token = generateJwt(payload);
+
+      // set cookie
+      res.cookie("token", token, {
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+        maxAge: 1000 * 60 * 60, // 1 jam
+      });
+
       return res.status(200).json({
         status: "success",
         message: "berhasil",
