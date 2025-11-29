@@ -13,6 +13,13 @@ export class AuthValidation {
       role: z.enum(["admin", "user"]),
       isActive: z.boolean(),
       activeCode: z.string(),
+      confirmPassword: z.string(),
     })
-    .strict() satisfies ZodType<AuthRegisterRequest>;
+    .superRefine((data, ctx) => {
+      if (data.password !== data.confirmPassword)
+        ctx.addIssue({ code: "custom", message: "password doesn't match" });
+    })
+    .strict() satisfies ZodType<
+    AuthRegisterRequest & { confirmPassword: string }
+  >;
 }

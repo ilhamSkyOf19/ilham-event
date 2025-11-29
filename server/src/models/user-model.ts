@@ -1,4 +1,4 @@
-// auth register
+// user interface
 export type IUser = {
   fullName: string;
   username: string;
@@ -8,4 +8,24 @@ export type IUser = {
   role: "admin" | "user";
   isActive: boolean;
   activeCode: string;
+};
+
+// user response
+export type UserResponseType = IUser & { _id: string };
+
+// to response
+export const toUserResponseType = (
+  user: IUser & { _id: string }
+): UserResponseType => {
+  return {
+    _id: user._id,
+    fullName: user.fullName,
+    username: user.username,
+    email: user.email,
+    password: user.password,
+    pictureUser: user.pictureUser,
+    role: user.role,
+    isActive: user.isActive,
+    activeCode: user.activeCode,
+  };
 };

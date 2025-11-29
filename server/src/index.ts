@@ -5,25 +5,45 @@ dotenv.config();
 import bodyParser from "body-parser";
 import express from "express";
 import authRoute from "./routes/auth.route";
+import connect from "./utils/db";
+import { errorMiddleware } from "./middlewares/error.middleware";
 
-// initialization express
-const app = express();
+async function initializeDB() {
+  try {
+    // connect
+    const db = await connect();
 
-// initialization port
-const port = process.env.PORT || 3001;
+    // cek db
+    console.log(db);
 
-// initialization body-parser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+    // initialization express
+    const app = express();
 
-// test
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+    // initialization port
+    const port = process.env.PORT || 3001;
 
-// auth route
-app.use("/api/auth", authRoute);
+    // initialization body-parser
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    // test
+    app.get("/", (_req, res) => {
+      res.send("Hello World!");
+    });
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+    // auth route
+    app.use("/api/auth", authRoute);
+
+    // initialize error middleware
+    app.use(errorMiddleware);
+
+    app.listen(port, () => {
+      console.log(`Server running on port ${port}`);
+    });
+  } catch (error) {
+    // error
+    console.log(error);
+  }
+}
+
+// initialize
+initializeDB();
