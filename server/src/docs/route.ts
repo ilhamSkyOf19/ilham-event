@@ -1,24 +1,24 @@
 import { Express } from "express";
-import swaggerOutput from "./swagger_output.json";
+import express from "express"; // <-- ini penting
 import swaggerUi from "swagger-ui-express";
+import swaggerOutput from "./swagger_output.json";
 import path from "path";
-import fs from "fs";
 
 export default function docs(app: Express) {
-  // css
-  const css = fs.readFileSync(
-    path.resolve(
-      __dirname,
-      "../../node_modules/swagger-ui-dist/swagger-ui.css"
-    ),
-    "utf8"
+  // Serve static assets
+  app.use(
+    "/swagger-ui",
+    express.static(path.join(__dirname, "../../public/swagger-ui-dist"))
   );
 
+  // Setup Swagger UI
   app.use(
     "/api-docs",
     swaggerUi.serve,
     swaggerUi.setup(swaggerOutput, {
-      customCss: css,
+      customCssUrl: "/swagger-ui/swagger-ui.css",
+      customJs: "/swagger-ui/swagger-ui-bundle.js",
+      customfavIcon: "/swagger-ui/favicon-32x32.png",
     })
   );
 }
