@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { Button } from "@heroui/react";
+import PageHead from "@/components/commons/PageHead";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -18,6 +19,9 @@ export default function Home() {
       <p>Hello World</p>
 
       <Button color="primary">Button</Button>
+
+      {/* page head */}
+      <PageHead title="Home Page" />
     </div>
   );
 }
