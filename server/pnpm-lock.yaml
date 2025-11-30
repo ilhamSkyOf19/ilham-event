@@ -20,9 +20,6 @@ importers:
       '@types/nodemailer':
         specifier: ^7.0.4
         version: 7.0.4
-      '@types/swagger-ui-dist':
-        specifier: ^3.30.6
-        version: 3.30.6
       bcrypt:
         specifier: ^6.0.0
         version: 6.0.0
@@ -59,9 +56,6 @@ importers:
       swagger-autogen:
         specifier: 2.23.7
         version: 2.23.7
-      swagger-ui-dist:
-        specifier: ^5.30.3
-        version: 5.30.3
       swagger-ui-express:
         specifier: ^5.0.1
         version: 5.0.1(express@5.1.0)
@@ -500,9 +494,6 @@ packages:
 
   '@types/strip-json-comments@0.0.30':
     resolution: {integrity: sha512-7NQmHra/JILCd1QqpSzl8+mJRc8ZHz3uDm8YV1Ks9IhK0epEiTw8aIErbvH9PI+6XbqhyIQy3462nEsn7UVzjQ==}
-
-  '@types/swagger-ui-dist@3.30.6':
-    resolution: {integrity: sha512-FVxN7wjLYRtJsZBscOcOcf8oR++m38vbUFjT33Mr9HBuasX9bRDrJsp7iwixcOtKSHEEa2B7o2+4wEiXqC+Ebw==}
 
   '@types/swagger-ui-express@4.1.6':
     resolution: {integrity: sha512-UVSiGYXa5IzdJJG3hrc86e8KdZWLYxyEsVoUI4iPXc7CO4VZ3AfNP8d/8+hrDRIqz+HAaSMtZSqAsF3Nq2X/Dg==}
@@ -2025,8 +2016,6 @@ snapshots:
   '@types/strip-bom@3.0.0': {}
 
   '@types/strip-json-comments@0.0.30': {}
-
-  '@types/swagger-ui-dist@3.30.6': {}
 
   '@types/swagger-ui-express@4.1.6':
     dependencies:
