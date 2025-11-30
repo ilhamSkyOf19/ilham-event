@@ -8,7 +8,7 @@ export default function docs(app: Express) {
   // Serve static assets
   app.use(
     "/swagger-ui",
-    express.static(path.join(__dirname, "../../public/swagger-ui-dist"))
+    express.static(path.join(__dirname, "../public/swagger-ui-dist"))
   );
 
   // Setup Swagger UI
