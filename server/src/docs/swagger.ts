@@ -1,5 +1,4 @@
 import swaggerAutogen from "swagger-autogen";
-import swagger from "swagger-autogen";
 
 // swagger definition
 const doc = {
