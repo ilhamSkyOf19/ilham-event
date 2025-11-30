@@ -12,7 +12,10 @@ export type IUser = {
 };
 
 // user response
-export type UserResponseType = Omit<IUser, "password"> & { _id: string };
+export type UserResponseType = Omit<
+  IUser,
+  "password" | "isActive" | "activeCode" | "createdAt"
+> & { _id: string };
 
 // to response
 export const toUserResponseType = (
@@ -23,9 +26,7 @@ export const toUserResponseType = (
     fullName: user.fullName,
     username: user.username,
     email: user.email,
-    pictureUser: user.pictureUser,
     role: user.role,
-    isActive: user.isActive,
-    activeCode: user.activeCode,
+    pictureUser: user.pictureUser,
   };
 };

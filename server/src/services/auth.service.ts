@@ -15,4 +15,17 @@ export class UserService {
       _id: response._id.toString(),
     });
   }
+
+  // activate code
+  static async activate(code: string): Promise<string | null> {
+    // get response
+    const response = await UserModel.findOneAndUpdate(
+      { activeCode: code },
+      { isActive: true },
+      { new: true }
+    );
+
+    // return
+    return response ? response.activeCode : null;
+  }
 }

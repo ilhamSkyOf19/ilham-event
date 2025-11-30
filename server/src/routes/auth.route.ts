@@ -15,23 +15,15 @@ authRoute.post(
   AuthController.register
 );
 
-/**
- * #swagger.requestBody = {
- *   required: true,
- *   content: {
- *     "application/json": {
- *       schema: {
- *         $ref: "#/components/schemas/LoginRequest"
- *       }
- *     }
- *   }
- * }
- */
+// login
 authRoute.post(
   "/auth/login",
   validationMiddleware<AuthLoginRequest>(AuthValidation.LOGIN),
   AuthController.login
 );
+
+// activation
+authRoute.post("/auth/activation", AuthController.activate);
 
 // export
 export default authRoute;

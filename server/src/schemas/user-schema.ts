@@ -52,6 +52,9 @@ UserSchema.pre("save", function () {
   const user = this;
   // get password
   user.password = encrypt(user.password);
+
+  // generate active code
+  user.activeCode = encrypt(user._id.toString());
 });
 
 // send email if user succes created

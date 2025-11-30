@@ -55,6 +55,26 @@
           }
         }
       }
+    },
+    "/auth/activation": {
+      "post": {
+        "tags": ["Auth"],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Activation"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -92,13 +112,22 @@
           },
           "email": {
             "type": "string",
-            "example": "ilham123@gmail.com"
+            "example": "ilham123@yopmail.com"
           },
           "password": {
             "type": "string",
             "example": "123"
           },
           "confirmPassword": {
+            "type": "string",
+            "example": "123"
+          }
+        }
+      },
+      "Activation": {
+        "type": "object",
+        "properties": {
+          "code": {
             "type": "string",
             "example": "123"
           }

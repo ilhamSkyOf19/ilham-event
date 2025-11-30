@@ -71,6 +71,7 @@ export class AuthController {
           { email: data.emailOrUsername },
           { username: data.emailOrUsername },
         ],
+        isActive: true,
       });
 
       // cek response
@@ -120,6 +121,40 @@ export class AuthController {
           ...response.toObject(),
           _id: response._id.toString(),
         }),
+      });
+    } catch (error) {
+      // error
+      console.log(error);
+      next(error);
+    }
+  }
+
+  // activate
+  static async activate(
+    req: Request<{}, {}, { code: string }>,
+    res: Response<ResponseType<string | null>>,
+    next: NextFunction
+  ) {
+    try {
+      // get query
+      const code = req.body.code as string;
+
+      // call service
+      const response = await UserService.activate(code);
+
+      // cek response
+      if (!response) {
+        return res.status(404).json({
+          status: "failed",
+          message: "Not Found",
+          data: null,
+        });
+      }
+
+      return res.status(200).json({
+        status: "success",
+        message: "berhasil",
+        data: response,
       });
     } catch (error) {
       // error
