@@ -18,16 +18,27 @@
   "paths": {
     "/auth/register": {
       "post": {
+        "tags": ["Auth"],
         "description": "",
         "responses": {
           "default": {
             "description": ""
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Register"
+              }
+            }
           }
         }
       }
     },
     "/auth/login": {
       "post": {
+        "tags": ["Auth"],
         "description": "",
         "responses": {
           "default": {
@@ -48,9 +59,10 @@
   },
   "components": {
     "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "token"
       }
     },
     "schemas": {
@@ -62,6 +74,31 @@
             "example": "ilham123"
           },
           "password": {
+            "type": "string",
+            "example": "123"
+          }
+        }
+      },
+      "Register": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "example": "ilham123"
+          },
+          "username": {
+            "type": "string",
+            "example": "ilham123"
+          },
+          "email": {
+            "type": "string",
+            "example": "ilham123@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "123"
+          },
+          "confirmPassword": {
             "type": "string",
             "example": "123"
           }

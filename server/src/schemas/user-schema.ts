@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { IUser } from "../models/user-model";
 import { encrypt } from "../utils/encrypt";
+import { renderEmail, sendEmail } from "../utils/mail/mail";
 
 const Schema = mongoose.Schema;
 
@@ -51,6 +52,29 @@ UserSchema.pre("save", function () {
   const user = this;
   // get password
   user.password = encrypt(user.password);
+});
+
+// send email if user succes created
+UserSchema.post("save", async function (doc, next) {
+  const user = doc;
+
+  // cek
+  console.log("send email to:", user.email);
+
+  // call send mail
+  const contentEmail = await renderEmail("registration-succes.ejs", {
+    username: user.username,
+    fullname: user.fullName,
+    email: user.email,
+    registeredAt: user.createdAt,
+    activationLink: `${process.env.CLEINT_URL}/auth/activation?code=${user.activeCode}`,
+  });
+
+  // send main
+  await sendEmail(user.email, "Registration Success", contentEmail);
+
+  // next step
+  next();
 });
 
 // model

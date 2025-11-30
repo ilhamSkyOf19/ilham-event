@@ -8,6 +8,7 @@ export type IUser = {
   role: "admin" | "user";
   isActive: boolean;
   activeCode: string;
+  createdAt?: string;
 };
 
 // user response
