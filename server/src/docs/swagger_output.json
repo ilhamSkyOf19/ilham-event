@@ -11,7 +11,7 @@
       "description": "Local server"
     },
     {
-      "url": "https://ilham-event-be.app/api",
+      "url": "https://ilham-event-be.vercel.app/api",
       "description": "Production server"
     }
   ],
@@ -32,6 +32,15 @@
         "responses": {
           "default": {
             "description": ""
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
           }
         }
       }
