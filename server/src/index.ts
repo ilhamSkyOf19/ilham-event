@@ -10,6 +10,7 @@ import { errorMiddleware } from "./middlewares/error.middleware";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import docs from "./docs/route";
+import path from "path";
 
 async function initializeDB() {
   try {
@@ -34,6 +35,8 @@ async function initializeDB() {
     // initialization body-parser
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
+
+    app.use(express.static(path.join(__dirname, "../public"))); // <-- ini tambahan
 
     // test
     app.get("/", (_req, res) => {
