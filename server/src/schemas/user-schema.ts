@@ -61,22 +61,20 @@ UserSchema.pre("save", function () {
 UserSchema.post("save", async function (doc, next) {
   const user = doc;
 
-  // cek
-  console.log("send email to:", user.email);
+  console.log("🔥 POST SAVE HOOK TERPANGGIL UNTUK:", user.email);
 
-  // call send mail
   const contentEmail = await renderEmail("registration-succes.ejs", {
     username: user.username,
     fullname: user.fullName,
     email: user.email,
     registeredAt: user.createdAt,
-    activationLink: `${process.env.CLEINT_URL}/auth/activation?code=${user.activeCode}`,
+    activationLink: `${process.env.CLIENT_URL}/auth/activation?code=${user.activeCode}`,
   });
 
-  // send main
+  console.log("📄 TEMPLATE EMAIL LENGTH:", contentEmail.length);
+
   await sendEmail(user.email, "Registration Success", contentEmail);
 
-  // next step
   next();
 });
 
