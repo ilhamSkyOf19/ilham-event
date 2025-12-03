@@ -61,8 +61,6 @@ UserSchema.pre("save", function () {
 UserSchema.post("save", async function (doc, next) {
   const user = doc;
 
-  console.log("🔥 POST SAVE HOOK TERPANGGIL UNTUK:", user.email);
-
   const contentEmail = await renderEmail("registration-succes.ejs", {
     username: user.username,
     fullname: user.fullName,

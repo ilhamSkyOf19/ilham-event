@@ -28,21 +28,15 @@ transporter.verify((error, success) => {
 // send email
 export const sendEmail = async (to: string, subject: string, html: string) => {
   try {
-    console.log("📧 SENDING EMAIL:");
-    console.log("TO:", to);
-    console.log("SUBJECT:", subject);
-    console.log("HTML LENGTH:", html?.length);
-
-    const result = await transporter.sendMail({
-      from: process.env.EMAIL_SMTP_USER,
+    // send email
+    await transporter.sendMail({
+      from: process.env.EMAIL_SMTP_USER as string,
       to,
       subject,
       html,
     });
-
-    console.log("✅ EMAIL SENT RESULT:", result);
   } catch (error) {
-    console.log("🚨 SEND EMAIL ERROR:", error);
+    console.log(error);
   }
 };
 
