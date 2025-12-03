@@ -31,8 +31,11 @@ export const sendEmail = async (to: string, subject: string, html: string) => {
 };
 
 // render email
-export const renderEmail = (template: string, data: any): string => {
-  const content = ejs.renderFile(
+export const renderEmail = async (
+  template: string,
+  data: any
+): Promise<string> => {
+  const content = await ejs.renderFile(
     path.join(__dirname, `./templates/${template}`),
     data
   );
