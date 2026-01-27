@@ -13,7 +13,7 @@ export class AuthController {
   static async register(
     req: Request<{}, {}, AuthRegisterRequest>,
     res: Response<ResponseType<UserResponseType | null>>,
-    next: NextFunction
+    next: NextFunction,
   ) {
     try {
       // get body
@@ -59,7 +59,7 @@ export class AuthController {
   static async login(
     req: Request<{}, {}, AuthLoginRequest>,
     res: Response<ResponseType<UserResponseType | null>>,
-    next: NextFunction
+    next: NextFunction,
   ) {
     try {
       // get request body
@@ -131,13 +131,22 @@ export class AuthController {
 
   // activate
   static async activate(
-    req: Request<{}, {}, { code: string }>,
+    req: Request<{}, {}, {}, { code: string }>,
     res: Response<ResponseType<string | null>>,
-    next: NextFunction
+    next: NextFunction,
   ) {
     try {
+      // cek code
+      if (!req.query.code) {
+        return res.status(400).json({
+          status: "failed",
+          message: "Bad Request",
+          data: null,
+        });
+      }
+
       // get query
-      const code = req.body.code as string;
+      const code = req.query.code;
 
       // call service
       const response = await UserService.activate(code);

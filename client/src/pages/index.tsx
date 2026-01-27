@@ -13,15 +13,18 @@ const geistMono = Geist_Mono({
 
 export default function Home() {
   return (
-    <div
+    <main
       className={`${geistSans.className} ${geistMono.className} flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black`}
     >
+      {/* head page */}
+      <PageHead title="Home Page" />
+
       <p>Hello World</p>
 
       <Button color="primary">Button</Button>
 
       {/* page head */}
       <PageHead title="Home Page" />
-    </div>
+    </main>
   );
 }

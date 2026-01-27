@@ -12,18 +12,18 @@ const authRoute: Router = Router();
 authRoute.post(
   "/auth/register",
   validationMiddleware<AuthRegisterRequest>(AuthValidation.REGISTER),
-  AuthController.register
+  AuthController.register,
 );
 
 // login
 authRoute.post(
   "/auth/login",
   validationMiddleware<AuthLoginRequest>(AuthValidation.LOGIN),
-  AuthController.login
+  AuthController.login,
 );
 
 // activation
-authRoute.post("/auth/activation", AuthController.activate);
+authRoute.get("/auth/activation", AuthController.activate);
 
 // export
 export default authRoute;

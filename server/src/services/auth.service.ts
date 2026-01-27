@@ -1,11 +1,11 @@
-import { AuthLoginRequest, AuthRegisterRequest } from "../models/auth-model";
+import { AuthRegisterRequest } from "../models/auth-model";
 import { toUserResponseType, UserResponseType } from "../models/user-model";
 import UserModel from "../schemas/user-schema";
 
 export class UserService {
   // create
   static async create(
-    req: AuthRegisterRequest
+    req: AuthRegisterRequest,
   ): Promise<UserResponseType | null> {
     // create
     const response = (await UserModel.create(req)).toObject();
@@ -22,7 +22,7 @@ export class UserService {
     const response = await UserModel.findOneAndUpdate(
       { activeCode: code },
       { isActive: true },
-      { new: true }
+      { new: true },
     );
 
     // return
