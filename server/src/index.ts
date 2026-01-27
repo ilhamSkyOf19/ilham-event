@@ -36,7 +36,7 @@ async function initializeDB() {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
 
-    app.use(express.static(path.join(__dirname, "../public"))); // <-- ini tambahan
+    app.use(express.static(path.join(__dirname, "../public")));
 
     // test
     app.get("/", (_req, res) => {

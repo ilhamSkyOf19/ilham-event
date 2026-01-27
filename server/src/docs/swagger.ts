@@ -1,7 +1,7 @@
 import swaggerAutogen from "swagger-autogen";
 
-// swagger definition
 const doc = {
+  openapi: "3.0.0",
   info: {
     version: "v0.0.1",
     title: "Dokumentasi API Event",
@@ -13,25 +13,10 @@ const doc = {
       description: "Local server",
     },
     {
-      url: "https://ilham-event-be.app/api",
+      url: "https://ilham-event-be.vercel.app/api",
       description: "Production server",
     },
   ],
-
-  components: {
-    securitySchemes: {
-      bearerAuth: {
-        type: "http",
-        scheme: "bearer",
-      },
-    },
-    schemas: {
-      LoginRequest: {
-        emailOrUsername: "ilham123",
-        password: "123",
-      },
-    },
-  },
 };
 
 const outputFile = "./src/docs/swagger_output.json";
