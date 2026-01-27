@@ -5,7 +5,7 @@ export const errorMiddleware = (
   err: any,
   _req: Request,
   res: Response<ResponseType<string | null>>,
-  _next: NextFunction
+  _next: NextFunction,
 ) => {
   console.log("Caught error:", err);
 
@@ -16,7 +16,7 @@ export const errorMiddleware = (
     return res.status(400).json({
       status: "failed",
       message: `Data ${field} already exists`,
-      data: null,
+      data: field,
     });
   }
 
