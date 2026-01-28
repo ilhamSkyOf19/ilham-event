@@ -28,12 +28,15 @@ const Register = () => {
           alt="logo"
           width={180}
           height={180}
+          loading="eager"
         />
         <Image
           src={"/images/illustration/login.svg"}
           alt="logo"
+          className="w-2/3 lg:w-full"
           width={1024}
           height={1024}
+          loading="eager"
         />
       </div>
 
