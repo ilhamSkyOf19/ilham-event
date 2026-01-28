@@ -9,6 +9,11 @@ const authService = {
     payload: IRegister,
   ): Promise<ResponseType<UserResponseType | null>> =>
     instance.post(`${endpoint.AUTH}/register`, payload),
+
+  // activation
+  activation: (code: string): Promise<ResponseType<string | null>> => {
+    return instance.post(`${endpoint.AUTH}/activation`, { code });
+  },
 };
 
 // export

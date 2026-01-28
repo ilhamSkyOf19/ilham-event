@@ -131,13 +131,13 @@ export class AuthController {
 
   // activate
   static async activate(
-    req: Request<{}, {}, {}, { code: string }>,
+    req: Request<{}, {}, { code: string }>,
     res: Response<ResponseType<string | null>>,
     next: NextFunction,
   ) {
     try {
       // cek code
-      if (!req.query.code) {
+      if (!req.body.code) {
         return res.status(400).json({
           status: "failed",
           message: "Bad Request",
@@ -146,7 +146,7 @@ export class AuthController {
       }
 
       // get query
-      const code = req.query.code;
+      const code = req.body.code;
 
       // call service
       const response = await UserService.activate(code);

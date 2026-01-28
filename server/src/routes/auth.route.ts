@@ -23,7 +23,7 @@ authRoute.post(
 );
 
 // activation
-authRoute.get("/auth/activation", AuthController.activate);
+authRoute.post("/auth/activation", AuthController.activate);
 
 // export
 export default authRoute;

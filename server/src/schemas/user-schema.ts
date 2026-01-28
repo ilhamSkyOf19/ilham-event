@@ -66,7 +66,7 @@ UserSchema.post("save", async function (doc, next) {
     fullname: user.fullName,
     email: user.email,
     registeredAt: user.createdAt,
-    activationLink: `${process.env.BASE_URL}/auth/activation?code=${user.activeCode}`,
+    activationLink: `${process.env.CLIENT_URL}/auth/activation?code=${user.activeCode}`,
   });
 
   console.log("📄 TEMPLATE EMAIL LENGTH:", contentEmail.length);
