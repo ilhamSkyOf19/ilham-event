@@ -1,3 +1,6 @@
+import { Session, User } from "next-auth";
+import { JWT } from "next-auth/jwt";
+
 interface IRegister {
   fullName: string;
   username: string;
@@ -21,8 +24,30 @@ export type IUser = {
   createdAt?: string;
 };
 
+export interface AuthLoginRequest {
+  emailOrUsername: string;
+  password: string;
+}
+
 // user response
-export type UserResponseType = Omit<
+export interface UserResponseType extends Omit<
   IUser,
   "password" | "isActive" | "activeCode" | "createdAt"
-> & { _id: string };
+> {
+  _id: string;
+}
+
+export interface UserExtended extends User {
+  accessToken?: string;
+  role?: string;
+}
+
+// session
+export interface SessionExtended extends Session {
+  accessToken?: string;
+}
+
+// jwt
+export interface JWTExtended extends JWT {
+  user?: UserExtended;
+}

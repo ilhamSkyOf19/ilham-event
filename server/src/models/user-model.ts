@@ -19,7 +19,7 @@ export type UserResponseType = Omit<
 
 // to response
 export const toUserResponseType = (
-  user: IUser & { _id: string }
+  user: UserResponseType,
 ): UserResponseType => {
   return {
     _id: user._id,

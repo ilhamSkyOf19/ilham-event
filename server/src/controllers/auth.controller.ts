@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { AuthLoginRequest, AuthRegisterRequest } from "../models/auth-model";
-import { ResponseType } from "../utils/request-response-type";
+import { AuthRequestType, ResponseType } from "../utils/request-response-type";
 import { UserService } from "../services/auth.service";
 import { toUserResponseType, UserResponseType } from "../models/user-model";
 import { PayloadJwtType } from "../models/jwt-model";
@@ -31,17 +31,6 @@ export class AuthController {
         role: response?.role ?? "user",
       };
 
-      // generate jwt
-      const token = generateJwt(payload);
-
-      // set cookie
-      res.cookie("token", token, {
-        httpOnly: true,
-        sameSite: "none",
-        secure: false,
-        maxAge: 1000 * 60 * 60, // 1 jam
-      });
-
       // cek
       return res.status(200).json({
         status: "success",
@@ -58,7 +47,7 @@ export class AuthController {
   // login
   static async login(
     req: Request<{}, {}, AuthLoginRequest>,
-    res: Response<ResponseType<UserResponseType | null>>,
+    res: Response<ResponseType<{ token: string } | null>>,
     next: NextFunction,
   ) {
     try {
@@ -106,21 +95,12 @@ export class AuthController {
       // generate jwt
       const token = generateJwt(payload);
 
-      // set cookie
-      res.cookie("token", token, {
-        httpOnly: true,
-        sameSite: "none",
-        secure: true,
-        maxAge: 1000 * 60 * 60, // 1 jam
-      });
-
       return res.status(200).json({
         status: "success",
         message: "berhasil",
-        data: toUserResponseType({
-          ...response.toObject(),
-          _id: response._id.toString(),
-        }),
+        data: {
+          token: token,
+        },
       });
     } catch (error) {
       // error
@@ -160,6 +140,50 @@ export class AuthController {
         });
       }
 
+      return res.status(200).json({
+        status: "success",
+        message: "berhasil",
+        data: response,
+      });
+    } catch (error) {
+      // error
+      console.log(error);
+      next(error);
+    }
+  }
+
+  // me
+  static async me(
+    req: AuthRequestType,
+    res: Response<ResponseType<PayloadJwtType | null>>,
+    next: NextFunction,
+  ) {
+    try {
+      // get payload
+      const payload = req.data;
+
+      // cek
+      if (!payload) {
+        return res.status(401).json({
+          status: "failed",
+          message: "Unauthorized",
+          data: null,
+        });
+      }
+
+      // call service
+      const response = await UserService.findUserById(payload._id);
+
+      // cek
+      if (!response) {
+        return res.status(404).json({
+          status: "failed",
+          message: "Not Found",
+          data: null,
+        });
+      }
+
+      // return
       return res.status(200).json({
         status: "success",
         message: "berhasil",

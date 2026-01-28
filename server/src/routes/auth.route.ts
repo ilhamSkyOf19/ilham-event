@@ -3,6 +3,7 @@ import { AuthController } from "../controllers/auth.controller";
 import { validationMiddleware } from "../middlewares/validation.middleware";
 import { AuthValidation } from "../validations/auth-validation";
 import { AuthLoginRequest, AuthRegisterRequest } from "../models/auth-model";
+import authMiddleware from "../middlewares/auth.middleware";
 
 export { Router } from "express";
 
@@ -21,6 +22,9 @@ authRoute.post(
   validationMiddleware<AuthLoginRequest>(AuthValidation.LOGIN),
   AuthController.login,
 );
+
+// me
+authRoute.get("/auth/me", authMiddleware, AuthController.me);
 
 // activation
 authRoute.post("/auth/activation", AuthController.activate);
