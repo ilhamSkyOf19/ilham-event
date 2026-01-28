@@ -4,15 +4,16 @@ import { IRegister, UserResponseType } from "@/types/Auth";
 import { ResponseType } from "@/types/Response";
 
 const authService = {
-  // register
-  register: (
+  register: async (
     payload: IRegister,
-  ): Promise<ResponseType<UserResponseType | null>> =>
-    instance.post(`${endpoint.AUTH}/register`, payload),
+  ): Promise<ResponseType<UserResponseType | null>> => {
+    const res = await instance.post(`${endpoint.AUTH}/register`, payload);
+    return res.data;
+  },
 
-  // activation
-  activation: (code: string): Promise<ResponseType<string | null>> => {
-    return instance.post(`${endpoint.AUTH}/activation`, { code });
+  activation: async (code: string): Promise<ResponseType<string | null>> => {
+    const res = await instance.post(`${endpoint.AUTH}/activation`, { code });
+    return res.data;
   },
 };
 
