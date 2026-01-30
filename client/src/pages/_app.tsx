@@ -22,12 +22,7 @@ export default function App({
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
         <HeroUIProvider>
-          <main
-            className={cn(
-              inter.className,
-              "flex min-h-screen min-w-full flex-col items-center justify-center gap-10 bg-zinc-50 font-sans dark:bg-black",
-            )}
-          >
+          <main className={cn(inter.className)}>
             <Component {...pageProps} />
           </main>
         </HeroUIProvider>
