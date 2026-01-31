@@ -54,7 +54,9 @@ const DashboardLayoutSidebar = ({ sidebarItems, isOpen }: PropsType) => {
             <ListboxItem
               key={item.key}
               className={cn("my-1 h-12 text-2xl", {
-                "bg-danger-500 text-white": item.href === router.pathname,
+                "bg-danger-500 text-white": router.pathname.startsWith(
+                  item.href,
+                ),
               })}
               startContent={item.icon}
               textValue={item.label}
@@ -75,7 +77,9 @@ const DashboardLayoutSidebar = ({ sidebarItems, isOpen }: PropsType) => {
           variant="light"
           size="lg"
           className="flex justify-start rounded-lg px-2 py-1.5"
-          onPress={() => signOut()}
+          onPress={() => {
+            signOut();
+          }}
         >
           <CiLogout className="text-xl" />
           Logout
