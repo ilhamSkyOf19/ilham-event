@@ -11,6 +11,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import docs from "./docs/route";
 import path from "path";
+import aclRoute from "./routes/acl.route";
 
 async function initializeDB() {
   try {
@@ -51,6 +52,9 @@ async function initializeDB() {
 
     // auth route
     app.use("/api", authRoute);
+
+    // acl
+    app.use("/api/acl", aclRoute);
 
     // docs
     docs(app);

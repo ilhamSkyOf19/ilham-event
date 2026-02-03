@@ -31,8 +31,8 @@ const UserSchema = new Schema<IUser>(
     },
     role: {
       type: Schema.Types.String,
-      enum: ["admin", "user"],
-      default: "user",
+      enum: ["admin", "member"],
+      default: "member",
     },
     isActive: {
       type: Schema.Types.Boolean,

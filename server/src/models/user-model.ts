@@ -5,7 +5,7 @@ export type IUser = {
   email: string;
   password: string;
   pictureUser: string;
-  role: "admin" | "user";
+  role: "admin" | "member";
   isActive: boolean;
   activeCode: string;
   createdAt?: string;
