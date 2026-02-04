@@ -12,6 +12,7 @@ import cors from "cors";
 import docs from "./docs/route";
 import path from "path";
 import aclRoute from "./routes/acl.route";
+import categoryRoute from "./routes/category.route";
 
 async function initializeDB() {
   try {
@@ -52,6 +53,9 @@ async function initializeDB() {
 
     // auth route
     app.use("/api", authRoute);
+
+    // category route
+    app.use("/api/category", categoryRoute);
 
     // acl
     app.use("/api/acl", aclRoute);
